@@ -78,9 +78,10 @@ const store = createStore({
 
   mutations: {
     updateCurrentHotel(state, payload) {
-      console.log("payload", payload);
 
       state.currentHotel = payload;
+      
+
     },
     toggleSidebar(state, payload) {
       state.sidebarState = payload;
@@ -121,6 +122,8 @@ const store = createStore({
     
 
     canselReservation(state, payload) {
+      console.log("hi")
+      console.log("pay" , payload)
       state.reservedHotels = state.reservedHotels.filter((item) => {
         return item.id != payload;
       });
@@ -138,5 +141,6 @@ const store = createStore({
       }
     },
   },
+
 });
 export default store;

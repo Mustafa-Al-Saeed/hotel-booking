@@ -1,7 +1,7 @@
 <template>
   <HeaderCom />
   <SideBar />
-  <CancelPopup v-if="cancelPopupState" />
+  <!-- <CancelPopup v-if="cancelPopupState" /> -->
   <RouterView />
   <FooterCom />
 </template>

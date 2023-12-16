@@ -21,16 +21,23 @@
 </template>
 
 <script setup>
+  const props = defineProps({
+    currentHotel: Object
+  });
+  const emit = defineEmits(['closeCancelPopup'])
+
 import { computed, reactive, ref } from "vue";
 import store from "@/store/store";
 
 // declarations
 const isSubmited = ref(false);
-const currentHotel = computed(() => store.getters.getCurrentHotel);
+// const currentHotel = computed(() => store.getters.getCurrentHotel);
 
 // close popup function
 const closeAction = ( ) =>{
-    store.commit("changeDeletePopupState", false)
+    // store.commit("changeDeletePopupState", false)
+    emit('closeCancelPopup')
+
 }
 const closePopup = (e) => {
   const overLay = document.getElementsByClassName("formCont")[0];
@@ -40,8 +47,8 @@ const closePopup = (e) => {
 };
 // cancel reervation
 const submitCancelResevation = () => {
-    store.commit("canselReservation",currentHotel.value?.id );
-    store.commit('changeBookedState' , {id:currentHotel.value?.id , isBooked:false})
+    store.commit("canselReservation",props.currentHotel?.id );
+    store.commit('changeBookedState' , {id:props.currentHotel?.id , isBooked:false});
 
     isSubmited.value = true
 

@@ -1,4 +1,5 @@
 <template>
+
   <div
     @click="closeSidebarFun"
     :class="`sidebar-overlay ${!isOpen ? 'hidden' : ''}`"
@@ -26,9 +27,15 @@ import { computed, ref } from "vue";
 const isOpen = computed(() => store.getters.getSidebarState);
 const reservedHotels = computed(() => store.getters.getReservedHotels);
 
+
+
+
 const closeSidebarFun = () => {
   store.commit("toggleSidebar", false);
 };
+
+
+
 
 
 </script>

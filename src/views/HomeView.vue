@@ -1,13 +1,14 @@
 <template>
-  <div class="hotelsContainer">
-    <div>
+       <CancelPopup v-if="cancelPopupState" :currentHotel="currentHotel" @closeCancelPopup="closeCancelPopup" />
         <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
-    </div>
+    
 
+  <div class="hotelsContainer">
+ 
     <div class="header fade-in-down-header"></div>
     <ul class="fade-in-down">
       <li v-for="( hotel , idx ) in hotels" :key="idx">
-        <RouterLink :to="getHotelDetailsLink(hotel.id)">
+        <div @click="(e)=>getHotelDetailsLink(e ,hotel.id)">
           <div class="cardCont">
             <div class="imgCont">
               <div class="imgOverlay">
@@ -23,16 +24,16 @@
                   <p>{{ hotel.address }}</p>
                   <p><RatingCom :rating="hotel.rating" /></p>
                 </div>
-                <button v-if="!hotel?.isBooked" class="booking" @click="openReservationPopup(hotel)">
+                <button v-if="!hotel?.isBooked" class="booking btn" @click="openReservationPopup(hotel)">
                   Book
                 </button>
-                <button @click="()=>openCacelPopup(hotel)" v-else class="cancel">
+                <button @click="()=>openCancelPopup(hotel)" v-else class="cancel btn">
                   cancel
                 </button>
               </div>
             </div>
           </div>
-        </RouterLink>
+        </div>
       </li>
     </ul>
   </div>
@@ -41,27 +42,43 @@
 <script setup>
 import store from "@/store/store";
 import {  ref , computed} from "vue";
+import { useRouter } from "vue-router";
 //components
 import ReservationPopupVue from "../components/popups/ReservationPopup.vue";
 import RatingCom from "../components/RatingCom.vue";
+import CancelPopup from "@/components/popups/CancelPopup.vue";
 
 //declarations
 const hotels = computed(()=> store.getters.getHotels);
-
-
+const router  = useRouter()
 const showBookingForm = ref(false);
 const currentHotel = ref({})
+const cancelPopupState =ref(false)
 
 //functions
-
-const openCacelPopup = ( hotel )=>{
-  store.commit("changeDeletePopupState" , true)
-  store.commit("updateCurrentHotel" , hotel ) 
+const openCancelPopup = ( hotel ) => {
+  cancelPopupState.value =true
+  currentHotel.value = hotel
 }
 
-const getHotelDetailsLink = (id) => {
-      return { name: 'hotelDetails', params: { id } };
-    }
+const closeCancelPopup = ( ) => {
+  cancelPopupState.value =false
+}
+
+
+// const openCancelPopup = ( hotel )=>{
+//   // store.commit("updateCurrentHotel" , hotel )
+//   store.dispatch("updateCurrentHotel" , hotel )
+//   // store.commit("changeDeletePopupState" , true)
+// }
+
+const getHotelDetailsLink = (e,id) => {
+
+  if(!e.target.closest('.btn')){
+  router.push(`/details/${id}`)
+  }
+  
+  }
 
 const openReservationPopup = (hotel) => {
   currentHotel.value = hotel

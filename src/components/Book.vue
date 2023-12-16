@@ -1,4 +1,6 @@
 <template>
+  <CancelPopup v-if="cancelPopupState" :currentHotel="currentHotel" @closeCancelPopup="closeCancelPopup" />
+
   <div class="book">
     <div class="image"  :style="{ backgroundImage: `url(/imgs/${hotel?.img})` }">
       <div class="text">
@@ -6,18 +8,36 @@
       </div>
     </div>
   </div>
-  <button @click="()=>openCacelPopup(hotel)">Cancel</button>
+  <button @click="()=>openCancelPopup(hotel)">Cancel</button>
 </template>
 
 <script setup>
 import store from '@/store/store';
+import { computed, ref } from "vue";
+import CancelPopup from './popups/CancelPopup.vue';
 const props = defineProps({
   hotel:Object
 })
-const openCacelPopup = ( hotel )=>{
-  store.commit("changeDeletePopupState" , true)
-  store.commit("updateCurrentHotel" , props.hotel ) 
+const currentHotel =ref({})
+const cancelPopupState =ref(false)
+
+
+
+
+// const openCacelPopup = ( hotel )=>{
+//   // store.commit("updateCurrentHotel" , props.hotel ) 
+//   store.dispatch("updateCurrentHotel" , hotel )
+// }
+// functions 
+const openCancelPopup = ( hotel ) => {
+  cancelPopupState.value =true
+  currentHotel.value = hotel
 }
+
+const closeCancelPopup = ( ) => {
+  cancelPopupState.value =false
+}
+
 </script>
 
 <style scoped>

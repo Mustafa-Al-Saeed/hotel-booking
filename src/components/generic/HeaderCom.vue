@@ -57,13 +57,22 @@ const openSidebarFun = ( ) =>{
  
  }
 
-
   .multicolortext {
         background-image:linear-gradient(to left,   yellow, orange, #ff5200);
         -webkit-background-clip: text;
         -moz-background-clip: text;
         background-clip: text;
         color: transparent;
+   }
+
+   @media(max-width : 768px){
+      .header {
+         flex-direction: column;
       }
+      .header h1 {
+         padding-bottom: 20px;
+         font-size: 25px;
+      }
+   }
 
 </style>
