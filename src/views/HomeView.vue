@@ -1,36 +1,38 @@
 <template>
   <div class="hotelsContainer">
     <div>
-       <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
+        <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
     </div>
 
     <div class="header fade-in-down-header"></div>
     <ul class="fade-in-down">
       <li v-for="( hotel , idx ) in hotels" :key="idx">
-        <div class="cardCont">
-          <div class="imgCont">
-            <div class="imgOverlay">
-              <h2 class="name">{{ hotel.name }}</h2>
+        <RouterLink :to="getHotelDetailsLink(hotel.id)">
+          <div class="cardCont">
+            <div class="imgCont">
+              <div class="imgOverlay">
+                <h2 class="name">{{ hotel.name }}</h2>
 
-              <div
-                class="imgHolder"
-                :style="{ backgroundImage: `url(/imgs/${hotel.img})` }"
-              ></div>
-            </div>
-            <div class="info">
-              <div class="address">
-                <p>{{ hotel.address }}</p>
-                <p><RatingCom :rating="hotel.rating" /></p>
+                <div
+                  class="imgHolder"
+                  :style="{ backgroundImage: `url(/imgs/${hotel.img})` }"
+                ></div>
               </div>
-              <button v-if="!hotel?.isBooked" class="booking" @click="openReservationPopup(hotel)">
-                Book
-              </button>
-              <button @click="()=>openCacelPopup(hotel)" v-else class="cancel">
-                cancel
-              </button>
+              <div class="info">
+                <div class="address">
+                  <p>{{ hotel.address }}</p>
+                  <p><RatingCom :rating="hotel.rating" /></p>
+                </div>
+                <button v-if="!hotel?.isBooked" class="booking" @click="openReservationPopup(hotel)">
+                  Book
+                </button>
+                <button @click="()=>openCacelPopup(hotel)" v-else class="cancel">
+                  cancel
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </RouterLink>
       </li>
     </ul>
   </div>
@@ -56,6 +58,10 @@ const openCacelPopup = ( hotel )=>{
   store.commit("changeDeletePopupState" , true)
   store.commit("updateCurrentHotel" , hotel ) 
 }
+
+const getHotelDetailsLink = (id) => {
+      return { name: 'hotelDetails', params: { id } };
+    }
 
 const openReservationPopup = (hotel) => {
   currentHotel.value = hotel
@@ -120,6 +126,12 @@ const closeReservationPopup = () => {
   transform: scale(1.1);
   transition: 1s;
 }
+
+a {
+    text-decoration: none ;
+    color: #ffffff;
+}
+
 
 h2.name {
   position: absolute;

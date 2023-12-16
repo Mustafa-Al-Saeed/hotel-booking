@@ -1,9 +1,14 @@
 <template>
 
-    <div class="header fade-in-down-header">
-        <h1 class="multicolortext">Hotel Booking Task</h1> 
-        <button @click="openSidebarFun" class=" ">My Reservation</button>
-    </div>
+      <div class="header fade-in-down-header">
+         <h1 class="multicolortext">Hotel Booking Task</h1> 
+         <div>
+            <RouterLink to="/">
+               <button>Home</button>
+            </RouterLink>
+            <button @click="openSidebarFun" class=" ">My Reservation</button>
+         </div>
+      </div>
 </template>
 
 <script setup>
