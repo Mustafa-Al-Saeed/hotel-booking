@@ -12,13 +12,9 @@
         </form>
       </div>
       <div class="success-msg" v-else>
-        <h2>Thank you for booking with us!</h2>
-        <div>
-          <p>
-            The booking on <span> {{ currentHotel?.name }} </span> has been canceled
-            successfully
-          </p>
-        </div>
+        <h2>   The booking on <span> {{ currentHotel?.name }} </span> has been canceled
+              successfully</h2>
+    
       </div>
     </div>
   </div>
@@ -105,9 +101,9 @@ const submitCancelResevation = () => {
   width: 400px;
   max-width: 90%;
 }
-.success-msg {
+/* .success-msg {
   height: 255px;
-}
+} */
 .success-msg > div {
   padding-top: 50px;
   text-align: center;

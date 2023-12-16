@@ -1,7 +1,7 @@
 <template>
   <div class="hotelsContainer">
     <div>
-      <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
+       <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
     </div>
 
     <div class="header fade-in-down-header"></div>
@@ -68,6 +68,13 @@ const closeReservationPopup = () => {
 </script>
 
 <style>
+
+.hotelsContainer{
+  max-width: 1400px;
+  margin: auto;
+  display:flex;
+  flex-direction: column;
+}
 .hotelsContainer ul li {
   width: 30%;
   margin: 1rem;
@@ -140,24 +147,23 @@ h2.name {
 }
 .booking{
   color: gold;
+  border: 1px solid gold;
+    box-shadow: 0 0 5px 1px inset #99988e;
 
 }
 .cancel{
   color: #a70000;
-
+  border: 1px solid #a70000;
+    box-shadow: 0 0 5px 1px inset #99988e;
 }
 
 .booking:hover , .cancel:hover {
-  border: 1px solid #fff;
-  color: #fff;
-  box-shadow: 0 0 5px 1px white;
+  border: 1px solid white;
+  color: white;
+  box-shadow: 0 0 5px 1px gray;
 }
 
-.fade-in-down-header {
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: fadeInDown 0.5s 0s ease-out forwards;
-}
+
 .fade-in-down {
   opacity: 0;
   transform: translateY(-50px);

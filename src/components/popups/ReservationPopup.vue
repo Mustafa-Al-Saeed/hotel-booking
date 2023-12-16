@@ -25,10 +25,10 @@
       </div>
       <div class="success-msg" v-else>
       <h2>Thank you for booking with us!</h2>
-      <div>
+      <!-- <div>
         <p>You have been booked into the <span>  {{ currentHotel?.name  }} </span> hotel </p>
 
-      </div>
+      </div> -->
     </div>
     </div>
 
@@ -49,8 +49,6 @@ const props = defineProps({
 
 // declarations
 const isSubmited = ref(false)
-
-
 
     // close popup function
     const closePopup = (e) => {
@@ -158,7 +156,7 @@ const isSubmited = ref(false)
   max-width: 90%;
 }
 .success-msg {
-  height: 310px;
+  /* height: 310px; */
 }
 .success-msg > div {
   padding-top: 80px;

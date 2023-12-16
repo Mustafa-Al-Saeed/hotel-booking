@@ -42,7 +42,7 @@ const openCacelPopup = ( hotel )=>{
 }
 
 button {
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(68 68 68);
   width: 100%;
   padding: 10px 0;
   cursor: pointer;

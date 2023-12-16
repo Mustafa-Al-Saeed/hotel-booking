@@ -1,6 +1,6 @@
 <template>
 
-    <div class="header">
+    <div class="header fade-in-down-header">
         <h1 class="multicolortext">Hotel Booking Task</h1> 
         <button @click="openSidebarFun" class=" ">My Reservation</button>
     </div>
@@ -29,7 +29,11 @@ const openSidebarFun = ( ) =>{
         /* box-shadow: 0 0 5px 5px gold; */
         
  }
-
+.fade-in-down-header {
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: fadeInDown 0.5s 0s ease-out forwards;
+}
  .header button {
     position: relative;
     padding: 0.5rem;

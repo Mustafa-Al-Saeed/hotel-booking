@@ -16,3 +16,22 @@ body{
    img{
     max-width: 100%;
    }
+
+
+     /* width */
+     ::-webkit-scrollbar {
+       width: 5px;
+     }
+  
+     /* Track */
+     ::-webkit-scrollbar-track {
+       background: #ddd;
+     }
+  
+     /* Handle */
+     ::-webkit-scrollbar-thumb {
+       background: gold;
+       border-radius: 10px;
+     }
+  
+ 

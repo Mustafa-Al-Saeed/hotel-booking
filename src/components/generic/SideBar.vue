@@ -34,6 +34,10 @@ const closeSidebarFun = () => {
 </script>
 
 <style scoped>
+
+*{
+    color: #fff;
+}
 .sidebar-overlay {
   position: fixed;
   z-index: 9;
@@ -47,7 +51,7 @@ const closeSidebarFun = () => {
   display: none;
 }
 .sideBar {
-  background-color: #ffffff;
+  background-color: #181818;
   height: 100vh;
   width: 310px;
   transition: 0.7s ease;
@@ -67,10 +71,10 @@ h2 {
   padding-bottom: 20px;
   text-align: center;
   border-bottom: 1px solid gray;
-  color: #000;
+
 }
 .no-reserved{
-  color: #000;
+  /* color: #000; */
   padding-top: 30px;
   text-align: center;
 }
