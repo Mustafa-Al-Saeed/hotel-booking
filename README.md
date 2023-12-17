@@ -13,3 +13,5 @@ npm run dev
 ### Compiles and minifies for production
 
 npm run build
+
+Demo Link: https://hotel-booking-one-phi.vercel.app/

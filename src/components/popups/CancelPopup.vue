@@ -31,11 +31,9 @@ import store from "@/store/store";
 
 // declarations
 const isSubmited = ref(false);
-// const currentHotel = computed(() => store.getters.getCurrentHotel);
 
 // close popup function
 const closeAction = ( ) =>{
-    // store.commit("changeDeletePopupState", false)
     emit('closeCancelPopup')
 
 }
@@ -82,7 +80,6 @@ const submitCancelResevation = () => {
   text-align: center;
   padding: 0.8rem 1rem;
   border-radius: 0.7rem;
-  /* font-weight: bold; */
   font-size: 1.1rem;
   cursor: pointer;
   background: #292929;
@@ -108,9 +105,6 @@ const submitCancelResevation = () => {
   width: 400px;
   max-width: 90%;
 }
-/* .success-msg {
-  height: 255px;
-} */
 .success-msg > div {
   padding-top: 50px;
   text-align: center;

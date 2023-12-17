@@ -23,46 +23,45 @@ const openSidebarFun = ( ) =>{
 </script>
 
 <style scoped>
-     .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 80%;
-        padding: 1rem;
-        margin:2rem auto 3rem;
-        border-bottom: 1px solid gold;
-        /* box-shadow: 0 0 5px 5px gold; */
-        
- }
-.fade-in-down-header {
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: fadeInDown 0.5s 0s ease-out forwards;
-}
- .header button {
-    position: relative;
-    padding: 0.5rem;
-    background: transparent;
-    color: gold;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    margin:0 0.5rem
- }
- .header button:hover {
-    position: relative;
-    padding: 0.5rem;
-    background: gold;
-    color: black;
- 
- }
+   .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 80%;
+      padding: 1rem;
+      margin:2rem auto 3rem;
+      border-bottom: 1px solid gold;
+      
+   }
+   .fade-in-down-header {
+   opacity: 0;
+   transform: translateY(-50px);
+   animation: fadeInDown 0.5s 0s ease-out forwards;
+   }
+   .header button {
+      position: relative;
+      padding: 0.5rem;
+      background: transparent;
+      color: gold;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin:0 0.5rem
+   }
+   .header button:hover {
+      position: relative;
+      padding: 0.5rem;
+      background: gold;
+      color: black;
+   
+   }
 
-  .multicolortext {
-        background-image:linear-gradient(to left,   yellow, orange, #ff5200);
-        -webkit-background-clip: text;
-        -moz-background-clip: text;
-        background-clip: text;
-        color: transparent;
+   .multicolortext {
+         background-image:linear-gradient(to left,   yellow, orange, #ff5200);
+         -webkit-background-clip: text;
+         -moz-background-clip: text;
+         background-clip: text;
+         color: transparent;
    }
 
    @media(max-width : 768px){

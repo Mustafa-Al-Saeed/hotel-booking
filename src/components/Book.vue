@@ -21,13 +21,6 @@ const props = defineProps({
 const currentHotel =ref({})
 const cancelPopupState =ref(false)
 
-
-
-
-// const openCacelPopup = ( hotel )=>{
-//   // store.commit("updateCurrentHotel" , props.hotel ) 
-//   store.dispatch("updateCurrentHotel" , hotel )
-// }
 // functions 
 const openCancelPopup = ( hotel ) => {
   cancelPopupState.value =true
@@ -45,7 +38,6 @@ const closeCancelPopup = ( ) => {
   margin-top: 20px;
 }
 .image {
-  /* background-image: url(../assets//images/3.jpg); */
   background-size: cover;
   background-position: center;
   width: 100%;

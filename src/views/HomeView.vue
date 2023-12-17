@@ -1,10 +1,10 @@
 <template>
-       <CancelPopup v-if="cancelPopupState" :currentHotel="currentHotel" @closeCancelPopup="closeCancelPopup" />
-        <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
+  <CancelPopup v-if="cancelPopupState" :currentHotel="currentHotel" @closeCancelPopup="closeCancelPopup" />
+  <ReservationPopupVue v-if="showBookingForm" :currentHotel="currentHotel" @closePopup="closeReservationPopup" />
     
 
   <div class="hotelsContainer">
- 
+
     <div class="header fade-in-down-header"></div>
     <ul class="fade-in-down">
       <li v-for="( hotel , idx ) in hotels" :key="idx">
@@ -64,13 +64,6 @@ const openCancelPopup = ( hotel ) => {
 const closeCancelPopup = ( ) => {
   cancelPopupState.value =false
 }
-
-
-// const openCancelPopup = ( hotel )=>{
-//   // store.commit("updateCurrentHotel" , hotel )
-//   store.dispatch("updateCurrentHotel" , hotel )
-//   // store.commit("changeDeletePopupState" , true)
-// }
 
 const getHotelDetailsLink = (e,id) => {
 
@@ -144,12 +137,6 @@ const closeReservationPopup = () => {
   transition: 1s;
 }
 
-a {
-    text-decoration: none ;
-    color: #ffffff;
-}
-
-
 h2.name {
   position: absolute;
   z-index: 10;
@@ -169,7 +156,6 @@ h2.name {
 .booking , .cancel {
   padding: 10px 20px;
   border-radius: 0.7rem;
-  /* font-weight: bold; */
   font-size: 1rem;
   cursor: pointer;
   background: #292929;
@@ -227,7 +213,6 @@ h2.name {
 .submit {
   padding: 0.8rem 1rem;
   border-radius: 0.7rem;
-  /* font-weight: bold; */
   font-size: 1.1rem;
   cursor: pointer;
   border: 1px solid gold;
@@ -261,7 +246,6 @@ h2.name {
 .inputWrapper label {
   width: 100px;
   display: flex;
-  /* font-weight: bold; */
   margin-bottom: 10px;
 }
 .inputWrapper {
