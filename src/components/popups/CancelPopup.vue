@@ -35,7 +35,6 @@ const isSubmited = ref(false);
 // close popup function
 const closeAction = ( ) =>{
     emit('closeCancelPopup')
-
 }
 const closePopup = (e) => {
   const overLay = document.getElementsByClassName("formCont")[0];
@@ -43,7 +42,7 @@ const closePopup = (e) => {
     closeAction()
   }
 };
-// cancel reervation
+// cancel reservation
 const submitCancelResevation = () => {
     store.commit("canselReservation",props.currentHotel?.id );
     store.commit('changeBookedState' , {id:props.currentHotel?.id , isBooked:false});
@@ -52,6 +51,7 @@ const submitCancelResevation = () => {
 
     setTimeout(()=>{
     store.commit("changeDeletePopupState", false);
+    closeAction()
     },2500)
 };
 </script>
