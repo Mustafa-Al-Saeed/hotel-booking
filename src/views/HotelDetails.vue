@@ -12,11 +12,14 @@
                 
                 <div class="rightSide">
                     <h2>{{hotel.name}}</h2>
-                    <p>{{ hotel.address }}</p>
+                    <p class="address">{{ hotel.address }}</p>
+
+                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam enim praesentium dicta accusantium repellendus est nihil animi rerum officiis tenetur. Unde iste dolore consequuntur consectetur voluptatum libero quidem eos dicta!</p>
+
                     <p class="rate"><RatingCom :rating="hotel.rating" /></p>
                     <button v-if="!hotel?.isBooked" @click="openReservationPopup" class="booking">Book</button>
 
-                    <button @click="()=>openCancelPopup()" v-else class="cancel btn">
+                    <button @click="()=>openCancelPopup()" v-else class="cancel btn ">
                         cancel
                     </button>
                 </div>
@@ -74,6 +77,8 @@
             background-position: center;
             width: 100%;
             height: 350px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px 0px #818181
         }
         .leftSide {
             width: 50%;
@@ -81,10 +86,12 @@
 
         .rightSide {
             width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 0 25px ;
+            text-align: right;
+        }
+
+        .rightSide .description {
+            line-height: 1.6;
         }
 
         button {
@@ -92,10 +99,15 @@
         }
         .rightSide h2 {
             padding: 20px 0;
+            color: gold;
+        }
+
+        .rightSide .address {
+            padding: 10px 0;
         }
 
         .rate {
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
         .booking , .cancel {
             padding: 10px 20px;
@@ -127,6 +139,8 @@
 
             .rightSide {
                 width: 100%;
+                padding-left: 0;
+                text-align: center;
             }
         }
     </style>
