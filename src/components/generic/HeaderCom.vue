@@ -1,5 +1,4 @@
 <template>
-
       <div class="header fade-in-down-header">
          <h1 class="multicolortext">Hotel Booking Task</h1> 
          <div>

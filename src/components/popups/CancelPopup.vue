@@ -50,8 +50,9 @@ const submitCancelResevation = () => {
     isSubmited.value = true
 
     setTimeout(()=>{
-    store.commit("changeDeletePopupState", false);
     closeAction()
+    isSubmited.value = false
+
     },2500)
 };
 </script>

@@ -1,4 +1,5 @@
 <template>
+  <CancelPopup v-if="cancelPopupState" :currentHotel="currentHotel" @closeCancelPopup="closeCancelPopup" />
 
   <div
     @click="closeSidebarFun"
@@ -9,7 +10,7 @@
 
     <div v-if="reservedHotels?.length">
       <div v-for="(hotel, idx) in reservedHotels" :key="idx">
-        <Book :hotel="hotel" />
+        <Book :hotel="hotel" @openCancelPopup="openCancelPopup"  />
       </div>
     </div>
 
@@ -23,9 +24,25 @@
 import Book from "../Book.vue";
 import store from "@/store/store";
 import { computed, ref } from "vue";
+import CancelPopup from "../popups/CancelPopup.vue";
 
 const isOpen = computed(() => store.getters.getSidebarState);
 const reservedHotels = computed(() => store.getters.getReservedHotels);
+const cancelPopupState =ref(false)
+const currentHotel = ref({})
+
+
+
+
+
+const openCancelPopup = ( hotel ) => {
+  cancelPopupState.value =true
+  currentHotel.value = hotel
+}
+const closeCancelPopup = ( ) => {
+  cancelPopupState.value =false
+}
+
 
 
 
