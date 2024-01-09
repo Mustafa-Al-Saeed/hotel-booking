@@ -2,122 +2,142 @@
   <div>
     <div class="formCont" @click="closePopup">
       <div v-if="!isSubmited" class="form">
-        <h3>Create Reservation for {{ currentHotel?.name  }}</h3>
+        <h3>Create Reservation for {{ currentHotel?.name }}</h3>
         <form @submit.prevent="submitReservation">
           <div class="inputWrapper">
             <label for="name">Name:</label>
             <input type="text" id="name" v-model="state.name" />
-            <p v-if="errors.name.state" class="err-msg">{{ errors.name.message }}</p>
+            <p v-if="errors.name.state" class="err-msg">
+              {{ errors.name.message }}
+            </p>
           </div>
+
+          <div>change branch</div>
 
           <div class="inputWrapper">
             <label for="email">Email:</label>
             <input type="email" id="email" v-model="state.email" />
-            <p v-if="errors.email.state" class="err-msg">{{ errors.email.message }}</p>
+            <p v-if="errors.email.state" class="err-msg">
+              {{ errors.email.message }}
+            </p>
           </div>
           <div class="inputWrapper">
             <label for="phone">Phone:</label>
             <input type="tel" id="phone" v-model="state.phone" />
-            <p v-if="errors.phone.state" class="err-msg">{{ errors.phone.message }}</p>
+            <p v-if="errors.phone.state" class="err-msg">
+              {{ errors.phone.message }}
+            </p>
           </div>
           <button type="submit" class="submit">Submit</button>
         </form>
       </div>
       <div class="success-msg" v-else>
-      <h2>Thank you for booking with us!</h2>
-      <!-- <div>
+        <h2>Thank you for booking with us!</h2>
+        <!-- <div>
         <p>You have been booked into the <span>  {{ currentHotel?.name  }} </span> hotel </p>
 
       </div> -->
+      </div>
     </div>
-    </div>
-
-
   </div>
 </template>
 
 <script setup>
-import { computed, reactive ,ref  } from "vue";
+import { computed, reactive, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required, email, maxLength, minLength ,numeric } from "@vuelidate/validators";
-import store from '@/store/store';
+import {
+  required,
+  email,
+  maxLength,
+  minLength,
+  numeric,
+} from "@vuelidate/validators";
+import store from "@/store/store";
 
-const emit = defineEmits(['closePopup'])
+const emit = defineEmits(["closePopup"]);
 const props = defineProps({
-  currentHotel:Object
-})
+  currentHotel: Object,
+});
 
 // declarations
-const isSubmited = ref(false)
+const isSubmited = ref(false);
 
-    // close popup function
-    const closePopup = (e) => {
-      const overLay = document.getElementsByClassName("formCont")[0];
-      if (e.target === overLay) {
-        emit("closePopup");
-      }
-    };
+// close popup function
+const closePopup = (e) => {
+  const overLay = document.getElementsByClassName("formCont")[0];
+  if (e.target === overLay) {
+    emit("closePopup");
+  }
+};
 
-    // form state and validation
-    const state = reactive({
-      name: "",
-      email: "",
-      phone: "",
+// form state and validation
+const state = reactive({
+  name: "",
+  email: "",
+  phone: "",
+});
+
+const errors = reactive({
+  name: {
+    message: "Please, add your full name",
+    state: false,
+  },
+  email: {
+    message: "Please, add your Email",
+    state: false,
+  },
+  phone: {
+    message: "Please, add a vaild phone number",
+    state: false,
+  },
+});
+
+const rules = computed(() => {
+  return {
+    name: { required },
+    email: { required, email },
+    phone: {
+      required,
+      minLength: minLength(7),
+      maxLength: maxLength(11),
+      numeric,
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, state);
+
+// submit form
+const submitReservation = async () => {
+  // remove the errors to revalidate the form
+  errors.name.state = false;
+  errors.email.state = false;
+  errors.phone.state = false;
+
+  // triger the validation
+  const result = await v$.value.$validate();
+  if (result) {
+    store.commit("changeBookedState", {
+      id: props.currentHotel?.id,
+      isBooked: true,
+    });
+    // store.commit('addReservedHotel' , props.currentHotel )
+    store.commit("addReservedHotel", {
+      hotel: props.currentHotel,
+      isInit: false,
     });
 
-    const errors = reactive({
-      name: {
-        message: "Please, add your full name",
-        state: false,
-      },
-      email: {
-        message: "Please, add your Email",
-        state: false,
-      },
-      phone: {
-        message: "Please, add a vaild phone number",
-        state: false,
-      },
-    });
-
-    const rules = computed(() => {
-      return {
-        name: { required },
-        email: { required, email },
-        phone: { required, minLength: minLength(7), maxLength: maxLength(11) , numeric },
-      };
-    });
-    
-    const v$ = useVuelidate(rules, state);
-
-
-    // submit form 
-    const submitReservation = async () => {
-      // remove the errors to revalidate the form
-      errors.name.state = false;
-      errors.email.state = false;
-      errors.phone.state = false;
-
-      // triger the validation
-      const result = await v$.value.$validate();
-      if (result) {
-
-        store.commit('changeBookedState' , {id: props.currentHotel?.id , isBooked:true})
-        // store.commit('addReservedHotel' , props.currentHotel )
-        store.commit('addReservedHotel' ,{ hotel:  props.currentHotel , isInit:false} )
-
-        isSubmited.value =true
-        setTimeout(()=>{
-          emit('closePopup')
-        }, 2500)
-      } else {
-        // set errors messages
-        errors.name.state = v$.value.name.$error;
-        errors.email.state = v$.value.email.$error;
-        errors.phone.state = v$.value.phone.$error;
-      }
-    };
-
+    isSubmited.value = true;
+    setTimeout(() => {
+      emit("closePopup");
+    }, 2500);
+  } else {
+    // set errors messages
+    errors.name.state = v$.value.name.$error;
+    errors.email.state = v$.value.email.$error;
+    errors.phone.state = v$.value.phone.$error;
+  }
+};
 </script>
 
 <style>
@@ -148,7 +168,8 @@ const isSubmited = ref(false)
   margin-top: 1rem;
 }
 
-.form , .success-msg {
+.form,
+.success-msg {
   background: black;
   padding: 2rem;
   border-radius: 10px;
@@ -167,7 +188,7 @@ const isSubmited = ref(false)
   color: gold;
 }
 .success-msg > h2 {
- text-align: center;
+  text-align: center;
 }
 
 .submit:hover {
